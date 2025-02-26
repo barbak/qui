@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="512"
+   height="512"
+   fill="#aaaaaa"
+   version="1.1"
+   viewBox="0 0 383.99999 383.99999"
+   id="svg834"
+   sodipodi:docname="bone-solid.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs838" />
+  <sodipodi:namedview
+     id="namedview836"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="pt"
+     showgrid="false"
+     units="px"
+     width="512px"
+     inkscape:zoom="1.1938165"
+     inkscape:cx="134.8616"
+     inkscape:cy="369.82233"
+     inkscape:window-width="2560"
+     inkscape:window-height="1377"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg834" />
+  <path
+     d="m 384.37403,115.31426 c 0,31.83095 -25.82424,57.65515 -57.6552,57.65515 H 292.93365 L 172.9655,292.93761 v 33.78511 c 0,31.83095 -25.82416,57.65523 -57.65517,57.65523 -31.830902,0 -57.655154,-25.82428 -57.655154,-57.65523 C 25.824253,326.72272 0,300.89851 0,269.06756 0,237.21715 25.824253,211.41237 57.655176,211.41237 H 91.440319 L 211.40844,91.444217 V 57.659075 C 211.40844,25.808677 237.23275,0 269.06757,0 c 31.83097,0 57.65513,25.80965 57.65513,57.659075 31.83097,0 57.65525,25.80965 57.65525,57.659075 z"
+     id="path832"
+     style="stroke-width:0.973202" />
+</svg>
