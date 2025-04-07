@@ -122,7 +122,7 @@ class JSONReadWriteSettings(NotImplementedSettings):
         """
         if what not in self.list():
             # TODO A real logger.
-            print("WRN - No entry found for {} !".format(repr(what)))
+            print("WRN - No entry found for {repr(what)} !")
 
         return self.__settings_dict.get(what, default)
 
