@@ -24,7 +24,7 @@ class IdedComboBox(QComboBox):
     QComboBox with an id.
     """
     def __init__(self, _id, parent=None):
-        super(IdedComboBox, self).__init__(parent=parent)
+        super().__init__(parent=parent)
         self.id = _id
 
     def itemsStringList(self):
@@ -59,7 +59,7 @@ class ComboChunkWidget(QWidget):
         """
         from functools import partial
 
-        super(ComboChunkWidget, self).__init__(parent=parent, f=f)
+        super().__init__(parent=parent, f=f)
         if chunk_list is None:
             chunk_list = []
 

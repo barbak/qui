@@ -86,7 +86,7 @@ class StatusGroupBox(QGroupBox):
         /!\ desc_dict should be an ordered dict
         so for the moment its a tuple of pairs.
         """
-        super(StatusGroupBox, self).__init__(parent=parent)
+        super().__init__(parent=parent)
         self.setting_prefix = setting_prefix
 
         self.attrs = deepcopy(desc_dict)

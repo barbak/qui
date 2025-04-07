@@ -45,7 +45,7 @@ class ToolWidget(QWidget):
         a standalone window if value is True, therefore will have a button box
         for common tool's features. (Settings / Close / Refresh buttons)
         """
-        super().__init__(parent=parent, f=f)
+        super().__init__()
         self._doc_url = None
         layout = QVBoxLayout()
         layout.setContentsMargins(3, 3, 3, 3)

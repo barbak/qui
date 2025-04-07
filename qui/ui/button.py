@@ -27,7 +27,7 @@ class ButtonBox(QWidget):
 
     def __init__(self, close_slot, refresh_slot=None, settings_slot=None,
                  parent=None, f=Qt.WindowFlags()):
-        super(ButtonBox, self).__init__(parent=parent, f=f)
+        super().__init__(parent=parent, f=f)
         self.setLayout(QHBoxLayout())
         self.layout().setContentsMargins(0, 0, 0, 0)
         self.refresh_btn = QuickButton("Refresh", refresh_slot)
@@ -78,7 +78,7 @@ class QuickButton(QPushButton):
         """
         `icon_size` is a tuple(int(width), int(height))
         """
-        super(QuickButton, self).__init__(icon=icon, text=text, parent=parent)
+        super().__init__(icon=icon, text=text, parent=parent)
         self._clicked_slot = clicked_slot
         if properties is None:
             properties = {}
@@ -106,7 +106,7 @@ class QuickButton(QPushButton):
         if event.button() == Qt.MouseButton.RightButton:
             self.rightPressed.emit(event)
 
-        super(QuickButton, self).mousePressEvent(event)
+        super().mousePressEvent(event)
 
     @property
     def clicked_slot(self):
@@ -123,7 +123,7 @@ class QuickButton(QPushButton):
 
 class TogglableEyeButton(QuickButton):
     def __init__(self, clicked_slot=None, tooltip=None):
-        super(TogglableEyeButton, self).__init__(
+        super().__init__(
             icon=icon_provider.get('eye-opened.svg'),
             tooltip=tooltip,
             clicked_slot=clicked_slot,
