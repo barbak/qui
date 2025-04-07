@@ -13,32 +13,32 @@ class NotImplementedSettings(object):
     Implements: get / set / delete / has / list
     """
 
-    def get(self, what, default=None):
+    def get(self, what, default=None) -> ...:
         """
         Get the value `what` from current backend specified by `self.scope`,
         return `default` if the backend could not fulfill the request.
         """
         raise NotImplementedError
 
-    def set(self, what, value):
+    def set(self, what, value) -> None:
         """
         Set the setting `what` with value `value` in `self.scope` backend.
         """
         raise NotImplementedError
 
-    def delete(self, what):
+    def delete(self, what) -> None:
         """
         Delete the value `what` from `self.scope` backend.
         """
         raise NotImplementedError
 
-    def list(self):
+    def list(self) -> list:
         """
         List setting' values contained in `self.scope` backend.
         """
         raise NotImplementedError
 
-    def has(self, what):
+    def has(self, what) -> bool:
         """
         Return True if setting `what` can be found in `self` backend,
         False otherwise.
@@ -67,7 +67,7 @@ class JSONReadOnlySettings(NotImplementedSettings):
 
         return {}
 
-    def get(self, what, default=None):
+    def get(self, what, default=None) -> ...:
         ret = default
         try:
             ret = self._get_dict_from_json()[what]
@@ -78,14 +78,14 @@ class JSONReadOnlySettings(NotImplementedSettings):
         finally:
             return ret
 
-    def has(self, what):
+    def has(self, what) -> bool:
         return what in self._get_dict_from_json()
 
-    def list(self):
+    def list(self) -> list:
         return list(self._get_dict_from_json().keys())
 
 
-class JSONReadWriteSettings(object):
+class JSONReadWriteSettings(NotImplementedSettings):
     """
     Implements: get / set / delete / has / list
     """
@@ -94,11 +94,11 @@ class JSONReadWriteSettings(object):
         self.__json_filename = json_filename
 
     @property
-    def json_filename(self):
+    def json_filename(self) -> str:
         return os.path.realpath(self.__json_filename)
 
     @property
-    def __settings_dict(self):
+    def __settings_dict(self) -> dict:
         if os.path.exists(self.json_filename):
             with open(self.json_filename) as f:
                 file_content = f.read()
@@ -115,7 +115,7 @@ class JSONReadWriteSettings(object):
 
         return settings_dict
 
-    def get(self, what, default=None):
+    def get(self, what, default=None) -> ...:
         """
         Return the setting named `what`, return `default` if it
         does not exists.
@@ -126,7 +126,7 @@ class JSONReadWriteSettings(object):
 
         return self.__settings_dict.get(what, default)
 
-    def set(self, what, value):
+    def set(self, what, value) -> None:
         """
         Set the User Setting `what` with value `value`.
         `value` must be a json serializable entity.
@@ -138,7 +138,7 @@ class JSONReadWriteSettings(object):
                                indent=2, separators=(',', ': '),
                                sort_keys=True))
 
-    def delete(self, what):
+    def delete(self, what) -> None:
         """
         Delete the `what` entry in User Settings.
         """
@@ -152,17 +152,17 @@ class JSONReadWriteSettings(object):
                                indent=2, separators=(',', ': '),
                                sort_keys=True))
 
-    def has(self, what):
+    def has(self, what) -> bool:
         """
         Return True if `what` in User Setting list, False otherwise.
         """
         return what in self.list()
 
-    def list(self):
+    def list(self) -> list:
         """
         Return the list of settings' name available in the DCC area.
         """
-        return self.__settings_dict.keys()
+        return list(self.__settings_dict.keys())
 
 
 class RuntimeOnlySettings(NotImplementedSettings):
@@ -172,17 +172,17 @@ class RuntimeOnlySettings(NotImplementedSettings):
 
     __settings = {}
 
-    def get(self, what, default=None):
+    def get(self, what, default=None) -> ...:
         return RuntimeOnlySettings.__settings.get(what, default)
 
-    def set(self, what, value):
+    def set(self, what, value) -> None:
         RuntimeOnlySettings.__settings[what] = value
 
-    def delete(self, what):
+    def delete(self, what)  -> None:
         del RuntimeOnlySettings.__settings[what]
 
-    def has(self, what):
+    def has(self, what) -> bool:
         return what in RuntimeOnlySettings.__settings
 
-    def list(self):
-        return RuntimeOnlySettings.__settings.keys()
+    def list(self) -> list:
+        return list(RuntimeOnlySettings.__settings.keys())

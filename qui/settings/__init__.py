@@ -21,14 +21,15 @@ class ToolSettings(object):
     """
     Base class for an App Settings.
     Handle the scope 'runtime' by default.
+    Implements: get / set / delete / has /  list
     """
-    def __init__(self, scope):
-        self.backends = {
+    def __init__(self, scope: str):
+        self.backends: dict[str, backend.NotImplementedSettings] = {
             'runtime': backend.RuntimeOnlySettings(),
         }
         self.scope = scope
 
-    def get(self, what, default=None):
+    def get(self, what, default=None) -> ...:
         """
         Get the value `what` from current backend specified by `self.scope`,
         return `default` if the backend could not fulfill the request.
@@ -38,7 +39,7 @@ class ToolSettings(object):
 
         return self.backends[self.scope].get(what, default)
 
-    def set(self, what, value):
+    def set(self, what, value) -> None:
         """
         Set the setting `what` with value `value` in `self.scope` backend.
         """
@@ -47,7 +48,7 @@ class ToolSettings(object):
 
         return self.backends[self.scope].set(what, value)
 
-    def delete(self, what):
+    def delete(self, what) -> None:
         """
         Delete the value `what` from `self.scope` backend.
         """
@@ -56,7 +57,7 @@ class ToolSettings(object):
 
         return self.backends[self.scope].delete(what)
 
-    def list(self):
+    def list(self) -> list:
         """
         List settings' values contained in `self.scope` backend.
         """
@@ -65,7 +66,7 @@ class ToolSettings(object):
 
         return self.backends[self.scope].list()
 
-    def has(self, what):
+    def has(self, what) -> bool:
         """
         Return True if setting `what` can be found in `self.scope` backend,
         False otherwise.
@@ -85,7 +86,7 @@ class Setting(object):
         type_: int, str, unicode, bool, float, [str]|[unicode]|(str,)|(unicode,)
         scopes: str(), unicode(), tuple|list(unicode()), tuple|list(str())
         """
-        super(Setting, self).__init__()
+        super().__init__()
         self.name = name
         self.type_ = type_
         # Checking type validity
@@ -102,7 +103,7 @@ class Setting(object):
         if self.tooltip:
             self.ui.setToolTip(self.tooltip)
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         """
         Return True if `self.type_` is a valid type description, False otherwise.
         """
@@ -114,10 +115,10 @@ class Setting(object):
             if i.endswith('.py')
         ]
 
-    def value(self):
+    def value(self) -> ...:
         return self.ui.value()
 
-    def setValue(self, value):
+    def setValue(self, value: ...):
         """
         TODO
         """
@@ -135,7 +136,7 @@ class SettingsHandler(QObject):
         TODO
         `tool_widget`, points to a qui.ui.widget.ToolWidget object.
         """
-        super(SettingsHandler, self).__init__()
+        super().__init__()
         self.domain = domain_name if domain_name else tool_widget.__class__.__name__
         self.items = []
         if save_slot:
@@ -153,7 +154,7 @@ class SettingsHandler(QObject):
             for i in items:
                 self += i
 
-    def values(self, scope=None):
+    def values(self, scope=None) -> dict:
         return {
             i: i.value()
             for i in self.items
