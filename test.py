@@ -41,7 +41,7 @@ class MehToolWidget(ToolWidget):
     def __init__(self):
         super().__init__()
         self.doc_url = "https://fett263.com"
-        self.settings = SettingsHandler(
+        self.settings_handler = SettingsHandler(
             self,
             save_slot=self.save_settings_slot,
             load_slot=self.load_settings_slot,
@@ -87,7 +87,7 @@ class MehToolWidget(ToolWidget):
                 )
             ),
         ]
-        [self.settings + s for s in settings]
+        [self.settings_handler + s for s in settings]
         self.setLayout(QVBoxLayout())
         self.layout().addWidget(QLabel("My Awesome Tool !!!!"))
 
@@ -97,19 +97,19 @@ class MehToolWidget(ToolWidget):
         """
         # raise NotImplementedError
         # Example:
-        scoped_dict = self.settings.scoped_dict()
-        usr_settings = MehToolSettings('usr').get(self.settings.domain, {})
+        scoped_dict = self.settings_handler.scoped_dict()
+        usr_settings = MehToolSettings('usr').get(self.settings_handler.domain, {})
         scoped_dict.get('usr', {}).update(usr_settings)
-        for i in self.settings:
+        for i in self.settings_handler:
             if 'usr' in i.scopes:
                 i.setValue(scoped_dict.get('usr', {}).get(i.name, i.default_value))
 
     def save_settings_slot(self, settings_update=None):
-        raise NotImplementedError
+        # raise NotImplementedError
         # Example:
-        # settings = TestAppSettings('usr').get(self.settings.domain, {})
-        # settings.update(settings_update)
-        # TestAppSettings('usr').set(self.settings.domain, settings)
+        settings = MehToolSettings('usr').get(self.settings_handler.domain, {})
+        settings.update(settings_update)
+        MehToolSettings('usr').set(self.settings_handler.domain, settings)
 
 
 def main(argv):

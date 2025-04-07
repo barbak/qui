@@ -64,7 +64,7 @@ class ToolWidget(QWidget):
             self.button_box = None
 
         self.settings_widget.setVisible(False)
-        self.settings = None  # Init it in your tool
+        self.settings_handler: SettingsHandler = SettingsHandler(self)  # Init it in your tool
         super().layout().addWidget(self.content_widget, 1)
         super().layout().addWidget(self.settings_widget, 1)
         if is_window_widget is True:
@@ -86,12 +86,13 @@ class ToolWidget(QWidget):
         To be plugged on SettingsHandler.settingsUpdated.
         """
         if self.button_box is not None:
-            self.button_box.settings_btn.setVisible(True if self.settings else False)
+            self.button_box.settings_btn.setVisible(True if self.settings_handler else False)
 
     def _settingsBtnSlot(self):
         if self.button_box is not None:
             settings_on = self.button_box.settings_btn.isChecked()
-            self.settings.load()
+            if self.settings_handler is not None:
+                self.settings_handler.load()
             self.content_widget.setVisible(not settings_on)
             self.settings_widget.setVisible(settings_on)
 
